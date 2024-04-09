@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chef;
 use App\Models\Food;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,22 +16,25 @@ class HomeController extends Controller
     public function welcome()
     {
         $foods = Food::all();
-        return view('welcome', ['foods' => $foods]);
+        $chefs = Chef::all();
+        return view('welcome', ['foods' => $foods, 'chefs' => $chefs]);
     }
     public function dashboard()
     {
+        $chefs = Chef::all();
         $foods = Food::all();
-        return view('welcome', ['foods' => $foods]);
+        return view('welcome', ['foods' => $foods, 'chefs' => $chefs]);
     }
     public function index()
     {
         $userType = Auth::user()->usertype;
+        $chefs = Chef::all();
         $foods = Food::all();
         if ($userType == 1) {
             return view('admin.index');
         } else {
 
-            return view('home', compact('foods'));
+            return view('home', compact('foods', 'chefs'));
         }
     }
 
