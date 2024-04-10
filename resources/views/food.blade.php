@@ -29,7 +29,26 @@
                                                    class="fa fa-angle-down"></i></a></div>
                                    </div>
                                </div>
+
                            </div>
+                           @if (session('message') && session('order_id') == $food->id)
+                               <p class="border border-green-600 px-4 py-2 text-center text-green-500">
+                                   {{ session('message') }}</p>
+                           @else
+                               <form action="{{ route('carts.store') }}" method="post">
+                                   @csrf
+                                   <div class="flex  w-full">
+                                       <input type="hidden" value="{{ $food->id }}" name="food_id">
+                                       <input type="number" min="1" value="1" name="quantity"
+                                           class=" w-40 ">
+                                       <input type="submit" value="Order"
+                                           class=" flex-[1_1_0%] bg-[#FB5849] text-white
+                                   hover:ring hover:ring-inset">
+
+                                   </div>
+                               </form>
+                           @endif
+
                        </div>
                    @endforeach
                </div>

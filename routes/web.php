@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChefController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\HomeController;
@@ -24,4 +25,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/foods/{food}/edit', [FoodController::class, 'edit'])->name('foods.edit');
     Route::patch('/foods/{food}', [FoodController::class, 'update'])->name('foods.update');
     Route::delete('/foods/{food}', [FoodController::class, 'destroy'])->name('foods.destroy');
+    Route::resource('carts', CartController::class);
 });

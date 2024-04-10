@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Chef;
 use App\Models\Food;
 use Illuminate\Http\Request;
@@ -17,24 +18,41 @@ class HomeController extends Controller
     {
         $foods = Food::all();
         $chefs = Chef::all();
-        return view('welcome', ['foods' => $foods, 'chefs' => $chefs]);
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $count = Cart::where('user_id', $user_id)->get()->count();
+        } else {
+            $count = 0;
+        }
+
+        return view('welcome', ['foods' => $foods, 'chefs' => $chefs, 'count' => $count]);
     }
     public function dashboard()
     {
         $chefs = Chef::all();
         $foods = Food::all();
-        return view('welcome', ['foods' => $foods, 'chefs' => $chefs]);
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $count = Cart::where('user_id', $user_id)->get()->count();
+        } else {
+            $count = 0;
+        }
+
+
+        return view('dashboard', ['foods' => $foods, 'chefs' => $chefs, 'count' => $count]);
     }
     public function index()
     {
         $userType = Auth::user()->usertype;
         $chefs = Chef::all();
         $foods = Food::all();
+        $user_id = Auth::user()->id;
+        $count = Cart::where('user_id', $user_id)->get()->count();
         if ($userType == 1) {
             return view('admin.index');
         } else {
 
-            return view('home', compact('foods', 'chefs'));
+            return view('home', compact('foods', 'chefs', 'count'));
         }
     }
 
