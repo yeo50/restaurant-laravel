@@ -97,8 +97,10 @@
             <!-- partial:partials/_navbar.html -->
             @include('admin/partials/topnavbar')
             <!-- partial -->
-              {{-- main-panel start  --}}
-              <div class="main-panel"></div>
+            {{-- main-panel start  --}}
+            <div class="main-panel">
+          
+            </div>
             <!-- main-panel ends -->
         </div>
     </div>

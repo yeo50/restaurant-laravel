@@ -16,6 +16,11 @@ Route::resources([
     'chefs' => ChefController::class,
     'orders' => OrderController::class,
 ]);
+Route::get(
+    '/ordersearch',
+    [OrderController::class, 'search']
+
+)->name('ordersearch');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 

@@ -20,7 +20,12 @@
             <!-- partial -->
             {{-- main-panel starts  --}}
             <div class="main-panel ">
-
+                <form action="{{ route('ordersearch') }}" method="get">
+                    @csrf
+                    @method('GET')
+                    <input type="text" name="search" class="text-black">
+                    <input type="submit" value="search">
+                </form>
                 <h1 class="text-center font-bold text-2xl my-4">Orders List</h1>
                 <table>
                     <tr>

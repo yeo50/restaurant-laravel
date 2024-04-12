@@ -6,6 +6,12 @@ use App\Models\Order;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 
+use Illuminate\Foundation\Http\FormRequest;
+// use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+
 class OrderController extends Controller
 {
     /**
@@ -16,7 +22,13 @@ class OrderController extends Controller
         $orders = Order::all();
         return view('admin.order', ['orders' => $orders]);
     }
+    public function search(HttpRequest $request)
+    {
+        $search = $request->search;
 
+        $orders = Order::where('name', 'Like', '%' . $search . '%')->orWhere('foodname', 'Like', '%' . $search . '%')->get();
+        return view('admin.order', ['orders' => $orders]);
+    }
     /**
      * Show the form for creating a new resource.
      */
