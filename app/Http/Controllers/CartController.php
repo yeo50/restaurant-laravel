@@ -58,7 +58,6 @@ class CartController extends Controller
         //     ->join('food', 'carts.food_id', '=', 'food.id')
         //     ->get();
         // return $carts;
-
         return view('cart', ['carts' => $carts, 'count' => $count]);
     }
 
