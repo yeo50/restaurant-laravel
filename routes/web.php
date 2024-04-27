@@ -11,20 +11,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'welcome']);
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-Route::resources([
-    'reservations' => ReservationController::class,
-    'chefs' => ChefController::class,
-    'orders' => OrderController::class,
-]);
-Route::get(
-    '/ordersearch',
-    [OrderController::class, 'search']
+Route::get('/home', [HomeController::class, 'index']);
 
-)->name('ordersearch');
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
-    Route::get('/home', [HomeController::class, 'index']);
     Route::get('/users', [AdminController::class, 'index'])->name('users.index');
     Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
     Route::get('/foods', [FoodController::class, 'menu'])->name('foods.menu');
@@ -33,4 +25,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::patch('/foods/{food}', [FoodController::class, 'update'])->name('foods.update');
     Route::delete('/foods/{food}', [FoodController::class, 'destroy'])->name('foods.destroy');
     Route::resource('carts', CartController::class);
+    Route::resources([
+        'reservations' => ReservationController::class,
+        'chefs' => ChefController::class,
+        'orders' => OrderController::class,
+    ]);
+    Route::get(
+        '/ordersearch',
+        [OrderController::class, 'search']
+
+    )->name('ordersearch');
 });

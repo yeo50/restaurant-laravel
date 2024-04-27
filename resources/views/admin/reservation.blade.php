@@ -40,7 +40,13 @@
                             <td>{{ $reservation->date }}</td>
                             <td>{{ $reservation->time }}</td>
                             <td>{{ $reservation->message }}</td>
-                            <th> <a href="">delete</a></th>
+                            <th>
+                                <form method="post" action="{{ route('reservations.destroy', $reservation->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Delete" class="hover:text-red-500">
+                                </form>
+                            </th>
                         </tr>
                     @endforeach
                 </table>

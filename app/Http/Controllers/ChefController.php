@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chef;
-use App\Http\Requests\StoreChefRequest;
-use App\Http\Requests\UpdateChefRequest;
+use App\Http\Requests\Chef\StoreChefRequest;
+use App\Http\Requests\Chef\UpdateChefRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ChefController extends Controller

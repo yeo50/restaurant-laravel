@@ -43,16 +43,22 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $userType = Auth::user()->usertype;
-        $chefs = Chef::all();
-        $foods = Food::all();
-        $user_id = Auth::user()->id;
-        $count = Cart::where('user_id', $user_id)->get()->count();
-        if ($userType == 1) {
-            return view('admin.index');
+        if (Auth::check()) {
+            $userType = Auth::user()->usertype;
+            if ($userType == 1) {
+                return view('admin.index');
+            } else {
+                $chefs = Chef::all();
+                $foods = Food::all();
+                $user_id = Auth::user()->id;
+                $count = Cart::where('user_id', $user_id)->get()->count();
+                return view('home', compact('foods', 'chefs', 'count'));
+            }
         } else {
+            $chefs = Chef::all();
+            $foods = Food::all();
 
-            return view('home', compact('foods', 'chefs', 'count'));
+            return view('home', compact('foods', 'chefs'));
         }
     }
 
@@ -103,4 +109,5 @@ class HomeController extends Controller
     {
         //
     }
+  
 }

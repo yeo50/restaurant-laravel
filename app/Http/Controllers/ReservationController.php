@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
-use App\Http\Requests\StoreReservationRequest;
-use App\Http\Requests\UpdateReservationRequest;
+use App\Http\Requests\Reservation\StoreReservationRequest;
+use App\Http\Requests\Reservation\UpdateReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -64,6 +64,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return redirect()->back();
     }
 }

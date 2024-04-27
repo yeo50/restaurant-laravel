@@ -48,7 +48,13 @@
                             <td class="px-4 py-2">{{ $order->foodname }}</td>
                             <td class="px-4 py-2">{{ $order->price }}</td>
                             <td class="px-4 py-2">{{ $order->quantity }}</td>
-                            <td class="px-4 py-2">Action</td>
+                            <td class="px-4 py-2">
+                                <form method="post" action="{{ route('orders.destroy', $order->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Delete" class="hover:text-red-500">
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </table>

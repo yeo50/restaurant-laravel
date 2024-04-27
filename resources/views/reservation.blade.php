@@ -76,6 +76,9 @@
                                           <div class="input-group date" data-date-format="dd/mm/yyyy">
                                               <input name="date" id="date" type="text" class="form-control"
                                                   placeholder="dd/mm/yyyy">
+                                              @error('date')
+                                                  <div class="text-red-500 ">{{ $message }}</div>
+                                              @enderror
                                               <div class="input-group-addon">
                                                   <span class="glyphicon glyphicon-th"></span>
                                               </div>

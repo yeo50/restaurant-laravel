@@ -53,6 +53,7 @@
                     @csrf
                     <div x-show="formOpen" class="w-5/12 mx-auto my-3">
                         @foreach ($carts as $cart)
+                            <input type="hidden" name="id[]" value="{{ $cart->id }}">
                             <input type="hidden" name="foodname[]" value="{{ $cart->food->title }}">
                             <input type="hidden" name="price[]" value="{{ $cart->food->price }}">
                             <input type="hidden" name="quantity[]" value="{{ $cart->quantity }}">

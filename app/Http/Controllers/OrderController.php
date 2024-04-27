@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
-
+use App\Models\Cart;
 use Illuminate\Foundation\Http\FormRequest;
 // use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
@@ -42,6 +42,8 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
+
+
         foreach ($request->foodname as $key => $foodname) {
             $new = new Order();
             $new->foodname = $foodname;
@@ -51,7 +53,10 @@ class OrderController extends Controller
             $new->phone = $request->phone;
             $new->address = $request->address;
             $new->save();
+            $cart = Cart::find($request->id[$key]);
+            $cart->delete();
         }
+
         return redirect()->back()->with('status', 'order success');
     }
 
@@ -84,6 +89,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->back();
     }
 }
